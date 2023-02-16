@@ -1,4 +1,4 @@
-let data = [[[['TOPOR', 'Ginette', 'f', 'Paris 11, Paris, France', '1944'], ['SIMON', 'Claude, Maurice', 'g', 'Hayange, Moselle, France', '1934'], ['SZLADOWER', 'Mendel', 'g', 'Warszawa, Masovia, Pologne', '1927']],
+var data = [[[['TOPOR', 'Ginette', 'f', 'Paris 11, Paris, France', '1944'], ['SIMON', 'Claude, Maurice', 'g', 'Hayange, Moselle, France', '1934'], ['SZLADOWER', 'Mendel', 'g', 'Warszawa, Masovia, Pologne', '1927']],
 			[],
 			[],
 			[['BAËR', 'Yvette, Suzanne', 'f', 'Metz, Moselle, France', '1938'], ['WAJNTROB', 'Josette', 'f', 'Paris 13, Paris, France', '1932']],
