@@ -1,4 +1,4 @@
-var data = [[[['TOPOR', 'Ginette', 'f', 'Paris 11, Paris, France', '1944'], ['SIMON', 'Claude, Maurice', 'g', 'Hayange, Moselle, France', '1934'], ['SZLADOWER', 'Mendel', 'g', 'Warszawa, Masovia, Pologne', '1927']],
+let data = [[[['TOPOR', 'Ginette', 'f', 'Paris 11, Paris, France', '1944'], ['SIMON', 'Claude, Maurice', 'g', 'Hayange, Moselle, France', '1934'], ['SZLADOWER', 'Mendel', 'g', 'Warszawa, Masovia, Pologne', '1927']],
 			[],
 			[],
 			[['BAËR', 'Yvette, Suzanne', 'f', 'Metz, Moselle, France', '1938'], ['WAJNTROB', 'Josette', 'f', 'Paris 13, Paris, France', '1932']],
@@ -371,4 +371,81 @@ var data = [[[['TOPOR', 'Ginette', 'f', 'Paris 11, Paris, France', '1944'], ['SI
 			[['BASSAN', 'Henri, Mossé, Haïm', 'g', "Saint-Brieuc, Côtes-d'Armor, France", '1938']],
 			[]]];
 
-localStorage.setItem("data", JSON.stringify(data));
+function age(day1, month1, year1, day2, month2, year2){
+	var Num_jour = [31,28,31,30,31,30,31,31,30,31,30,31];
+	var age = "";
+	var dif_year = Number.parseInt(year2) - Number.parseInt(year1);
+	var dif_month = Number.parseInt(month2) - Number.parseInt(month1);
+	var dif_day = Number.parseInt(day2) - Number.parseInt(day1);
+	if (dif_day < 0){
+		dif_month -= 1;
+		dif_day += Num_jour[month1 - 1];
+	}
+	if (dif_month < 0){
+		dif_year -= 1
+		dif_month += 12
+	}
+	if (dif_year > 0){
+		age = dif_year.toString() + ' an';
+		if (dif_year > 1){
+			age += "s";
+		}
+	}
+	else{
+		if (dif_month > 0){
+			age = dif_month.toString() + ' mois';
+		}
+		else{
+			age = dif_day.toString() + ' jour';
+			if (dif_day > 1){
+				age +="s";
+			}
+		}
+	}
+	return age;
+}
+
+function change(){
+	var date_68 = "10/02/1944";
+	var year_68 = Number.parseInt(date_68.split("/")[2]);
+	var month_68 = Number.parseInt(date_68.split("/")[1]);
+	var day_68 = Number.parseInt(date_68.split("/")[0]);
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var infos = data[month - 1][day - 1];
+	if (infos.length > 0){
+		var data_str = '<h1>Hommage aux enfants du convoi 68 déportés à Auschwitz</h1>';
+	}
+	else{
+		var data_str = '';
+	}
+	var enfant;
+	for (let num = 0; num < infos.length; num++){
+		enfant = infos[num];
+		var year_born = Number.parseInt(enfant[4]);
+		data_str += "Il y a " + (year - year_born ).toString() + " ans, ";
+		data_str += "jour pour jour naissait " 
+		data_str += enfant[0] + " " + enfant[1];
+		data_str += " à " + enfant[3].split(', ')[0] + " en " + enfant[3].split(', ')[2];
+		data_str += ", déporté"
+		if (enfant[2] == 'f'){
+			data_str += "e";
+		} 
+		data_str += " à Auschwitz à l'âge de " + age(day, month, year_born, day_68, month_68, year_68);
+		data_str += ".<br>Pensons à ";
+		if (enfant[2] == 'g'){
+			data_str += "lui";
+		}
+		else{
+			if (enfant[2] == 'f'){
+				data_str += "elle";
+			}
+		}
+		data_str += ".<br><br>";
+	}
+	//data_str += infos.length;
+	document.getElementById("current_date").innerHTML = data_str //day + "/" + month + "/" + year + " " + age(29,1,1944, 10,02,1944);
+}
+change();
