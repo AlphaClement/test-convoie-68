@@ -445,7 +445,6 @@ function change(){
 		}
 		data_str += ".<br><br>";
 	}
-	//data_str += infos.length;
-	document.getElementById("current_date").innerHTML = data_str //day + "/" + month + "/" + year + " " + age(29,1,1944, 10,02,1944);
+	document.getElementById("current_date").innerHTML = data_str;
 }
 change();
